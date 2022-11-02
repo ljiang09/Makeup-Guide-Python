@@ -8,7 +8,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-FILE_NAME = 'horizontal_centering_data.txt'
+FILE_NAMES = ['horizontal_centering_data.txt',
+			  'horizontal_sweep_data.txt',
+			  'vertical_centering_data.txt',
+			  'vertical_sweep_data.txt']
 
 
 def plot_transforms(transform_matrices):
@@ -48,22 +51,22 @@ def find_max_min(transform_values, plot_number):
 	print(f"{plot_number}, max: {max}, min: {min}")
 
 
-data = np.array([])
-with open(FILE_NAME, 'r') as file:
-	# convert string to array
-	content = file.read()
-	content = content.replace("[[[", "").replace("]]]", "")
-	content = content.split("]]\n[[")
-	for i, matrix in enumerate(content):
-		content[i] = matrix.split("], [")
-		for j, line in enumerate(content[i]):
-			content[i][j] = line.split(", ")
+def plot_from_file(file_name):
+	data = np.array([])
+	with open(file_name, 'r') as file:
+		# convert string to array
+		content = file.read()
+		content = content.replace("[[[", "").replace("]]]", "")
+		content = content.split("]]\n[[")
+		for i, matrix in enumerate(content):
+			content[i] = matrix.split("], [")
+			for j, line in enumerate(content[i]):
+				content[i][j] = line.split(", ")
 
-	# convert array to numpy array
-	data = np.array(content).astype(np.float)
+		# convert array to numpy array
+		data = np.array(content).astype(np.float)
 
-
-plot_transforms(data)
-plt.ylim([-1,1])
-plt.legend()
-plt.show()
+	plot_transforms(data)
+	plt.ylim([-1,1])
+	plt.legend()
+	plt.show()
