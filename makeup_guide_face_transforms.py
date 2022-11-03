@@ -1,12 +1,13 @@
 '''
-Given a list of 4x4 face transform matrices, finds the range of each value in
-the matrix and plots them individually. Also on each plot is the range of
-values for easy reference.
+Given a list of 4x4 face transform matrices, prints the range of each value in
+the matrix and plots the ones that vary a lot.
 '''
 
 import numpy as np
 from matplotlib import pyplot as plt
 
+
+tolerance = 0.15
 
 
 def plot_transforms(transform_matrices):
@@ -27,25 +28,29 @@ def plot_transforms(transform_matrices):
 def plot_transform(transform_values, plot_number):
 	'''
 	Plots an array of values, with the minimum and maximum listed on the plot.
+	Note: it only plots if the values differ significantly.
 
 	Args:
 	transform_values: a 1D array representing all values for one position in
 		each transform matrix. Ex: all values for position [0][0]
 	plot_number: a string representing which position is being plotted
 	'''
-	plt.plot(range(len(transform_values)), transform_values, label=plot_number)
-	plt.ylim([-1,1])
-	plt.legend()
-	find_max_min(transform_values, plot_number)
+	max = find_max_min(transform_values, plot_number)[0]
+	min = find_max_min(transform_values, plot_number)[1]
+	if max-min >= tolerance:
+		plt.plot(range(len(transform_values)), transform_values, label=plot_number)
+		plt.ylim([-1,1])
+		plt.legend()
+		print(f"{plot_number}, max: {max}, min: {min}")
 
 
-def find_max_min(transform_values, plot_number):
+def find_max_min(transform_values):
 	'''
-	Prints the max and min values for each column set.
+	Returns the max and min values for each column set.
 	'''
 	max = transform_values.max()
 	min = transform_values.min()
-	print(f"{plot_number}, max: {max}, min: {min}")
+	return [max, min]
 
 
 def plot_from_file(file_name):
