@@ -46,7 +46,7 @@ def plot_transform(transform_values, plot_number):
 		plt.plot(range(len(transform_values)), transform_values, label=plot_number)
 		plt.ylim([-1,1])
 		plt.legend()
-		print(f"{plot_number}, max: {max}, min: {min}")
+	print(f"{plot_number}, max: {max}, min: {min}")
 
 
 def plot_from_file(file_name):
