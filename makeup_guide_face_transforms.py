@@ -7,7 +7,12 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-tolerance = 0.15
+tolerance = 0.1
+
+FILE_NAMES = ['horizontal_centering_data.txt',
+			  'horizontal_sweep_data.txt',
+			  'vertical_centering_data.txt',
+			  'vertical_sweep_data.txt']
 
 
 def plot_transforms(transform_matrices):
@@ -35,22 +40,13 @@ def plot_transform(transform_values, plot_number):
 		each transform matrix. Ex: all values for position [0][0]
 	plot_number: a string representing which position is being plotted
 	'''
-	max = find_max_min(transform_values, plot_number)[0]
-	min = find_max_min(transform_values, plot_number)[1]
+	max = transform_values.max()
+	min = transform_values.min()
 	if max-min >= tolerance:
 		plt.plot(range(len(transform_values)), transform_values, label=plot_number)
 		plt.ylim([-1,1])
 		plt.legend()
 		print(f"{plot_number}, max: {max}, min: {min}")
-
-
-def find_max_min(transform_values):
-	'''
-	Returns the max and min values for each column set.
-	'''
-	max = transform_values.max()
-	min = transform_values.min()
-	return [max, min]
 
 
 def plot_from_file(file_name):
@@ -70,3 +66,6 @@ def plot_from_file(file_name):
 
 	plot_transforms(data)
 	plt.show()
+
+
+plot_from_file(FILE_NAMES[0])
