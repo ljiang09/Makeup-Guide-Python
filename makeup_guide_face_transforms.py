@@ -8,11 +8,6 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-FILE_NAMES = ['horizontal_centering_data.txt',
-			  'horizontal_sweep_data.txt',
-			  'vertical_centering_data.txt',
-			  'vertical_sweep_data.txt']
-
 
 def plot_transforms(transform_matrices):
 	'''
@@ -39,6 +34,8 @@ def plot_transform(transform_values, plot_number):
 	plot_number: a string representing which position is being plotted
 	'''
 	plt.plot(range(len(transform_values)), transform_values, label=plot_number)
+	plt.ylim([-1,1])
+	plt.legend()
 	find_max_min(transform_values, plot_number)
 
 
@@ -67,6 +64,4 @@ def plot_from_file(file_name):
 		data = np.array(content).astype(np.float)
 
 	plot_transforms(data)
-	plt.ylim([-1,1])
-	plt.legend()
 	plt.show()
