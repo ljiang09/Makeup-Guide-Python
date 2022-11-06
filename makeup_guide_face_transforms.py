@@ -15,7 +15,7 @@ FILE_NAMES = ['horizontal_centering_data_1.txt',
 			  'vertical_sweep_data_1.txt']
 
 
-def plot_transforms(transform_matrices):
+def plot_transforms(transform_matrices, file_name):
 	'''
 	Given a list of 4x4 transform matrices, plots each value in the matrix.
 	There should be 16 graphs in total, one for each value in the 4x4.
@@ -25,12 +25,12 @@ def plot_transforms(transform_matrices):
 		matrices.
 	'''
 	for i in range(4):
-		plt.figure(i)
+		plt.figure(i+1)
 		for j in range(4):
-			plot_transform(transform_matrices[0:,i,j], f"[{i},{j}]")
+			plot_transform(transform_matrices[0:,i,j], f"[{i},{j}]", file_name)
 
 
-def plot_transform(transform_values, plot_number):
+def plot_transform(transform_values, plot_number, file_name):
 	'''
 	Plots an array of values, with the minimum and maximum listed on the plot.
 	Note: it only plots if the values differ significantly.
@@ -46,6 +46,7 @@ def plot_transform(transform_values, plot_number):
 		plt.plot(range(len(transform_values)), transform_values, label=plot_number)
 		plt.ylim([-1,1])
 		plt.legend()
+		plt.title(file_name)
 	print(f"{plot_number}, max: {max}, min: {min}")
 
 
@@ -62,10 +63,10 @@ def plot_from_file(file_name):
 				content[i][j] = line.split(", ")
 
 		# convert array to numpy array
-		data = np.array(content).astype(np.float)
+		data = np.array(content).astype(np.float64)
 
-	plot_transforms(data)
+	plot_transforms(data, file_name)
 	plt.show()
 
 
-plot_from_file(FILE_NAMES[0])
+# plot_from_file(FILE_NAMES[0])
