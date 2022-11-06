@@ -7,7 +7,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-tolerance = 0.1
+tolerance = 0.07
 
 FILE_NAMES = ['horizontal_centering_data_1.txt',
 			  'horizontal_sweep_data_1.txt',
