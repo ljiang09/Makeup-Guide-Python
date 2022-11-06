@@ -9,10 +9,10 @@ from matplotlib import pyplot as plt
 
 tolerance = 0.1
 
-FILE_NAMES = ['horizontal_centering_data.txt',
-			  'horizontal_sweep_data.txt',
-			  'vertical_centering_data.txt',
-			  'vertical_sweep_data.txt']
+FILE_NAMES = ['horizontal_centering_data_1.txt',
+			  'horizontal_sweep_data_1.txt',
+			  'vertical_centering_data_1.txt',
+			  'vertical_sweep_data_1.txt']
 
 
 def plot_transforms(transform_matrices):
